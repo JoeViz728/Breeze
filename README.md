@@ -1,3 +1,5 @@
+**Note.** The code in this project was generated automatically to match my design, and I tested it from the user side.
+
 # Breeze
 
 A small self-hosted chat app. One Node.js process serves the API and the built client. Messages go over WebSockets and land in SQLite, so there is no database to set up.
