@@ -1,36 +1,39 @@
+**Note.** The code in this project was generated automatically to match my design, and I tested it from the user side.
+
 # Breeze
 
-A calm, minimal, self-hosted chat application — a simple alternative to Discord. Modern IRC with inline media support and URL content parsing.
+A calm, self-hosted chat. Discord for the room layout, IRC for the feel: channels, a topic line, text first, and tools only when you ask for them.
 
-## Features
+<p>
+  <img src="docs/join.png" alt="Join screen" width="23%" />
+  <img src="docs/chat.png" alt="A channel with markup, mentions, and a highlighted message" width="23%" />
+  <img src="docs/channels.png" alt="Channel list" width="23%" />
+  <img src="docs/overview.png" alt="Server overview" width="23%" />
+</p>
 
-- **Clean three-panel layout** — channels sidebar, spacious chat area, on-demand right panel
-- **Real-time messaging** via WebSockets
-- **Inline media** — images and videos embedded from URLs
-- **Link previews** — automatic Open Graph parsing for shared links
-- **On-demand tools** — Media & Links grid, Members list, Search, Channel info
-- **SQLite persistence** — zero-config database, easy to back up
-- **Self-hostable** — single Node.js process serves API + frontend
+One Node.js process serves the API and the client in production. Messages go over WebSockets and land in SQLite, so there is no database to set up. Shared links get an Open Graph preview. Image and video URLs render in the message.
 
-## Quick Start
+The first visit creates the server admin. Later visits can join with a username, or sign in with a password. An admin can close login to everyone else.
 
-From the project root:
+## Run
+
+Linux, macOS, or WSL:
 
 ```bash
-# Linux, macOS, or WSL
 ./scripts/start-dev.sh
 ```
 
+Windows:
+
 ```bat
-REM Windows
 scripts\start-dev.bat
 ```
 
-The script installs dependencies if they are missing and rebuilds `better-sqlite3` when this folder was last set up on another operating system. Then it starts the API and the frontend together.
+The script installs dependencies when they are missing, and rebuilds `better-sqlite3` when this folder was last set up on the other operating system. Then it starts the API and the client together.
 
-Open **http://localhost:5173**. The first visit creates the server admin. Later visits can join with a username, or sign in with a password.
+Open http://localhost:5173. The API listens on port 3001.
 
-You can also install and start by hand:
+To install and start by hand:
 
 ```bash
 npm install
@@ -46,33 +49,14 @@ npm run build
 npm start
 ```
 
-The server runs on port **3001** by default. Set `PORT` to change it.
+Set `PORT` to change the server port. The default is 3001.
 
-## Architecture
+## What is in place
 
-```
-breezeChat/
-├── client/          React + Vite frontend
-├── server/          Express + WebSocket + SQLite backend
-│   └── data/        SQLite database (auto-created)
-└── package.json     Root scripts
-```
+- Channels grouped by category, with a topic line.
+- Real-time messages, typing, and presence.
+- Markup, mentions, inline media, and link previews.
+- Unread state, message links, and search.
+- Admin settings, access on a channel or a category, and moderation.
 
-## UI Layout
-
-| Area | Purpose |
-|------|---------|
-| **Left sidebar** | Channel list + server tools |
-| **Top bar** | Server name, channel + topic, global tool icons |
-| **Main chat** | Message list with media/link previews + input |
-| **Right panel** | Slides in on demand — info, media, members, search |
-
-## Tech Stack
-
-- **Frontend:** React 19, TypeScript, Vite, custom CSS
-- **Backend:** Node.js, Express, ws, better-sqlite3
-- **Database:** SQLite (WAL mode)
-
-## License
-
-MIT
+Requires Node.js 20 or newer.
