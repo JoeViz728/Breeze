@@ -59,4 +59,15 @@ Set `PORT` to change the server port. The default is 3001.
 - Unread state, message links, and search.
 - Admin settings, access on a channel or a category, and moderation.
 
+## To do
+
+- [ ] Attachments.
+- [ ] More autocomplete, markup, and `/` commands.
+- [ ] More page styling.
+- [ ] A choice of an anonymous nickname, or an account with a password and a profile.
+- [ ] Voice chat, camera, and desktop streaming.
+- [ ] Automatic moderation tools.
+- [ ] Roles.
+- [ ] Friends and direct messages.
+
 Requires Node.js 20 or newer.
